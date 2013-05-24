@@ -184,14 +184,10 @@ public abstract class GCMBaseIntentService extends IntentService {
                         if (sTotal != null) {
                             try {
                                 int total = Integer.parseInt(sTotal);
-                                mLogger.log(Log.VERBOSE,
-                                        "Received notification for %d deleted"
-                                        + "messages", total);
+                                mLogger.log(Log.VERBOSE, "Received notification for %d deleted messages", total);
                                 onDeletedMessages(context, total);
                             } catch (NumberFormatException e) {
-                                mLogger.log(Log.ERROR, "GCM returned invalid "
-                                        + "number of deleted messages (%d)",
-                                        sTotal);
+                                mLogger.log(Log.ERROR, "GCM returned invalid number of deleted messages (%d)", sTotal);
                             }
                         }
                     } else {
