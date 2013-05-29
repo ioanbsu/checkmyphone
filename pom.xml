@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.artigile.android</groupId>
     <artifactId>checkmyphone</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
 
     <packaging>apk</packaging>
-    <name>Google Places API</name>
+    <name>Check My Phone Android App</name>
 
 
     <properties>
