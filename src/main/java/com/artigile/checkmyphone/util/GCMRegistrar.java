@@ -6,6 +6,8 @@ package com.artigile.checkmyphone.util;
  * Time: 9:40 AM
  */
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -104,12 +106,12 @@ public final class GCMRegistrar {
      *    <li>It defines at least one {@link android.content.BroadcastReceiver} with category
      *      {@code PACKAGE_NAME}.
      *    <li>The {@link android.content.BroadcastReceiver}(s) uses the
-     *      {@value com.google.android.gcm.GCMConstants#PERMISSION_GCM_INTENTS}
+     *      {@value GCMConstants#PERMISSION_GCM_INTENTS}
      *      permission.
      *    <li>The {@link android.content.BroadcastReceiver}(s) handles the 2 GCM intents
-     *      ({@value com.google.android.gcm.GCMConstants#INTENT_FROM_GCM_MESSAGE}
+     *      ({@value GCMConstants#INTENT_FROM_GCM_MESSAGE}
      *      and
-     *      {@value com.google.android.gcm.GCMConstants#INTENT_FROM_GCM_REGISTRATION_CALLBACK}).
+     *      {@value GCMConstants#INTENT_FROM_GCM_REGISTRATION_CALLBACK}).
      * </ol>
      * ...where {@code PACKAGE_NAME} is the application package.
      * <p>
@@ -211,8 +213,7 @@ public final class GCMRegistrar {
 
     static void internalRegister(Context context, String... senderIds) {
         String flatSenderIds = getFlatSenderIds(senderIds);
-        log(context, Log.VERBOSE, "Registering app for senders %s",
-                flatSenderIds);
+        log(context, Log.VERBOSE, "Registering app for senders %s", flatSenderIds);
         Intent intent = new Intent(GCMConstants.INTENT_TO_GCM_REGISTRATION);
         intent.setPackage(GSF_PACKAGE);
         setPackageNameExtra(context, intent);

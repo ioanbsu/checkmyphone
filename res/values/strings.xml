@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">How is my phone doing?</string>
-    <string name="first_button">Click Me</string>
+    <string name="unregister">Unregister</string>
     <string name="sample_menu_item">clickMe</string>
     <string name="already_registered">Device had been already registered</string>
     <string name="server_registering">registering server</string>
@@ -16,5 +16,6 @@
     <string name="gcm_deleted">GCM deleted</string>
     <string name="gcm_error">GCM error</string>
     <string name="gcm_recoverable_error">GCM recoverable error</string>
+    <string name="register">register</string>
 
 </resources>

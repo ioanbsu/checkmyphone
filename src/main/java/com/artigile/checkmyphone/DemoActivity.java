@@ -1,20 +1,18 @@
 package com.artigile.checkmyphone;
 
 import android.app.Activity;
-import android.content.*;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import com.artigile.checkmyphone.util.GCMRegistrar;
-import com.google.android.gms.gcm.GoogleCloudMessaging;
-
-import java.io.IOException;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.artigile.checkmyphone.CommonUtilities.*;
 
@@ -25,6 +23,14 @@ import static com.artigile.checkmyphone.CommonUtilities.*;
  */
 public class DemoActivity extends Activity {
 
+    private final BroadcastReceiver mHandleMessageReceiver =
+            new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    String newMessage = intent.getExtras().getString(EXTRA_MESSAGE);
+                    mDisplay.append(newMessage + "\n");
+                }
+            };
     TextView mDisplay;
     AsyncTask<Void, Void, Void> mRegisterTask;
 
@@ -84,7 +90,7 @@ public class DemoActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             /*
              * Typically, an application registers automatically, so options
              * below are disabled. Uncomment them if you want to manually
@@ -110,6 +116,14 @@ public class DemoActivity extends Activity {
         }
     }
 
+    public void unregisterDevice(View v) {
+        GCMRegistrar.unregister(this);
+    }
+
+    public void registerDevice(View v) {
+        GCMRegistrar.register(this,SENDER_ID);
+    }
+
     @Override
     protected void onDestroy() {
         if (mRegisterTask != null) {
@@ -126,15 +140,6 @@ public class DemoActivity extends Activity {
                     getString(R.string.error_config, name));
         }
     }
-
-    private final BroadcastReceiver mHandleMessageReceiver =
-            new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String newMessage = intent.getExtras().getString(EXTRA_MESSAGE);
-            mDisplay.append(newMessage + "\n");
-        }
-    };
 
 
 }

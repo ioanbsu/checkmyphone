@@ -153,8 +153,7 @@ public abstract class GCMBaseIntentService extends IntentService {
      * @param context application's context.
      * @param registrationId the registration id returned by the GCM service.
      */
-    protected abstract void onRegistered(Context context,
-            String registrationId);
+    protected abstract void onRegistered(Context context, String registrationId);
 
     /**
      * Called after a device has been unregistered.

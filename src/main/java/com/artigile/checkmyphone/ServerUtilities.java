@@ -1,5 +1,7 @@
 package com.artigile.checkmyphone;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.content.Context;
 import android.util.Log;
 import com.artigile.checkmyphone.util.GCMRegistrar;
@@ -33,7 +35,9 @@ public final class ServerUtilities {
     static void register(final Context context, final String regId) {
         Log.i(TAG, "registering device (regId = " + regId + ")");
         String serverUrl = SERVER_URL + "/register";
+        Account[] accounts= AccountManager.get(context).getAccounts();
         Map<String, String> params = new HashMap<String, String>();
+        params.put("account", accounts[0].name);
         params.put("regId", regId);
         long backoff = BACKOFF_MILLI_SECONDS + random.nextInt(1000);
         // Once GCM returns a registration id, we need to register it in the
